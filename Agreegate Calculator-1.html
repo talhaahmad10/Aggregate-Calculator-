@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Aggregate Calculator</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div class="calculator">
+        <h2><u>Aggregate Calculator By Talha Ahmad</u></h2>
+        <label for="matricTotal">Total Matric Marks:</label>
+        <input type="number" id="matricTotal">
+
+        <label for="matricObtained">Obtained Matric Marks:</label>
+        <input type="number" id="matricObtained">
+
+        <label for="matricWeight">Matric Weightage (%):</label>
+        <input type="number" id="matricWeight" value="">
+
+        <label for="interTotal">Total Intermediate Marks:</label>
+        <input type="number" id="interTotal">
+
+        <label for="interObtained">Obtained Intermediate Marks:</label>
+        <input type="number" id="interObtained">
+
+        <label for="interWeight">Intermediate Weightage (%):</label>
+        <input type="number" id="interWeight" value="">
+
+        <label for="testTotal">Total Entry Test Marks:</label>
+        <input type="number" id="testTotal">
+
+        <label for="testObtained">Obtained Entry Test Marks:</label>
+        <input type="number" id="testObtained">
+
+        <label for="testWeight">Entry Test Weightage (%):</label>
+        <input type="number" id="testWeight" value="">
+
+<h6>Weightage Is Percentage Required For Merrit</h6>
+
+ <button onclick="calculateAggregate()">Calculate Aggregate</button>
+
+        <p id="result"></p>
+        
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
+<style class="css">
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+    }
+
+    .calculator {
+        width: 90%;
+        max-width: 400px;
+        margin: 30px auto;
+        border: 1px solid #000000;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    h6 {
+        text-align: center;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    #result {
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+
+    @media screen {
+        max-width: 600px;
+
+    }
+</style>
+<script class="jv">
+    function calculateAggregate() {
+    const matricTotal = parseInt(document.getElementById('matricTotal').value, 10);
+    const matricObtained = parseInt(document.getElementById('matricObtained').value, 10);
+    const interTotal = parseInt(document.getElementById('interTotal').value, 10);
+    const interObtained = parseInt(document.getElementById('interObtained').value, 10);
+    const testTotal = parseInt(document.getElementById('testTotal').value, 10);
+    const testObtained = parseInt(document.getElementById('testObtained').value, 10);
+
+    const matricWeightInput = document.getElementById('matricWeight').value.trim();
+    const interWeightInput = document.getElementById('interWeight').value.trim();
+    const testWeightInput = document.getElementById('testWeight').value.trim();
+
+    const matricWeight = matricWeightInput === '' ? 0 : parseInt(matricWeightInput, 10) / 100;
+    const interWeight = interWeightInput === '' ? 0 : parseInt(interWeightInput, 10) / 100;
+    const testWeight = testWeightInput === '' ? 0 : parseInt(testWeightInput, 10) / 100;
+
+    if (isNaN(matricTotal) || isNaN(matricObtained) || isNaN(interTotal) || isNaN(interObtained) || isNaN(testTotal) || isNaN(testObtained)) {
+        document.getElementById('result').innerHTML = "Please enter valid marks for all fields.";
+    } else {
+        const matricPercentage = (matricObtained / matricTotal) * 100;
+        const interPercentage = (interObtained / interTotal) * 100;
+        const testPercentage = (testObtained / testTotal) * 100;
+
+        const aggregate = (matricPercentage * matricWeight) + (interPercentage * interWeight) + (testPercentage * testWeight);
+
+        document.getElementById('result').innerHTML = `Your Aggregate is: ${aggregate.toFixed(2)}`;
+    }
+}
+</script>
